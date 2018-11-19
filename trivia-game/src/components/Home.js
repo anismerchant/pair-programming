@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import decode from 'decode-html';
 
 class Home extends Component {
 
@@ -10,23 +11,32 @@ class Home extends Component {
   }
 
   // Grab questions
-  displayQuestion(data) {
-    let dataArray = data.results;
-    return dataArray.map((question) => {
-      return question;
+  decodeQuestions(questions) {
+    console.log(questions)
+    let result = questions.map((q) => {
+      return {
+        ...q, 
+        question: decode(q.question),
+        correct_answer: decode(q.correct_answer),
+        incorrect_answers: q.incorrect_answers.map(decode)
+      };
     });
+    console.log(result);
+    return result;
   }
+
 
   // Fetch data from API and set state
   componentDidMount() {
-    let computers = fetch(this.getCategoryUrl(this.state.currentCategory));
-    computers.then((response) => {
+    let currentCategory = fetch(this.getCategoryUrl(this.state.currentCategory));
+    currentCategory.then((response) => {
       return response.json();
         }).then((data) => {
           this.setState({
-            questions: this.displayQuestion(data)
+            questions: this.decodeQuestions(data.results)
           })
       }).catch(err => console.log(err));
+
   }
 
   // Change category and its associated questions
@@ -91,31 +101,7 @@ class Home extends Component {
     })
   }
 
-  render() {
-    // Loop through all the questions
-    const currentQuestion = this.state.questions[this.state.currentIndex];
-
-    if (currentQuestion != null) {
-      return (
-        <div>
-          {this.makeCategory()}
-          <h1>{currentQuestion.question}</h1>
-          {
-            getChoices(currentQuestion).map((choice, key )=> {
-              return <div key={key}><input type="radio" name="choice" value={choice}/>{choice}</div>;
-            })
-          }
-          <button onClick={this.nextQuestion}>Next</button>
-        </div>
-      );
-    } else {
-      return <h1>Loading...</h1>;
-    }
-
-  }
-}
-
-function getChoices(question) {
+  getChoices(question) {
     // Put all of the choices in choices array    
     let choices = [];
       
@@ -123,7 +109,7 @@ function getChoices(question) {
       return choices.push(incorrect);
     });
     
-    choices.push(question.correct_answer)
+    choices.push(question.correct_answer);
 
     // Randomize order
     for (let a = choices.length-1; a > 0; a--) {
@@ -134,6 +120,38 @@ function getChoices(question) {
     }
 
   return choices;
+}
+
+getAnswer = (e) => {
+  if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
+    return setImmediate(() => alert("Correct"));
+  } else {
+    return setImmediate(() => alert("Incorrect"));
+  }
+}
+
+  render() {
+    // Loop through all the questions
+    const currentQuestion = this.state.questions[this.state.currentIndex];
+
+    if (currentQuestion != null) {
+      return (
+        <div>
+          {this.makeCategory()}
+          <h1>{currentQuestion.question}</h1>
+          {
+            this.getChoices(currentQuestion).map((choice, key )=> {
+              return <div key={key}><input onClick={this.getAnswer} type="radio" name="choice"  value={choice}/>{choice}</div>;
+            })
+          }
+          <button onClick={this.nextQuestion}>Next</button>
+        </div>
+      );
+    } else {
+      return <h1>Loading...</h1>;
+    }
+
+  }
 }
 
 export default Home;
