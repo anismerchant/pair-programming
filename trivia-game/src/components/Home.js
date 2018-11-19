@@ -4,7 +4,7 @@ class Home extends Component {
 
   // Establish state
   state = {
-    currentCategory: "generalKnowledge",
+    currentCategory: "General Knowledge",
     questions: [],
     currentIndex: 0
   }
@@ -60,15 +60,15 @@ class Home extends Component {
   // API endpoints of categories
   getCategoryUrl = (category) => {
     let categories = {
-      generalKnowledge: "https://opentdb.com/api.php?amount=25&category=9&difficulty=easy&type=multiple",
-      books: "https://opentdb.com/api.php?amount=10&category=10&difficulty=easy&type=multiple",
-      film: "https://opentdb.com/api.php?amount=25&category=11&difficulty=easy&type=multiple",
-      computers: "https://opentdb.com/api.php?amount=25&category=18&difficulty=easy&type=multiple",
-      music: "https://opentdb.com/api.php?amount=25&category=12&difficulty=easy&type=multiple",
-      geography: "https://opentdb.com/api.php?amount=25&category=22&difficulty=easy&type=multiple",
-      mythology: "https://opentdb.com/api.php?amount=25&category=20&type=multiple",
-      videoGames: "https://opentdb.com/api.php?amount=25&category=15&difficulty=easy&type=multiple",
-      boardGames: "https://opentdb.com/api.php?amount=10&category=16&difficulty=easy&type=multiple"
+      "Board Games": "https://opentdb.com/api.php?amount=10&category=16&difficulty=easy&type=multiple",
+      "Books": "https://opentdb.com/api.php?amount=10&category=10&difficulty=easy&type=multiple",
+      "Computers": "https://opentdb.com/api.php?amount=25&category=18&difficulty=easy&type=multiple",
+      "Film": "https://opentdb.com/api.php?amount=25&category=11&difficulty=easy&type=multiple",
+      "General Knowledge": "https://opentdb.com/api.php?amount=25&category=9&difficulty=easy&type=multiple",
+      "Geography": "https://opentdb.com/api.php?amount=25&category=22&difficulty=easy&type=multiple",
+      "Music": "https://opentdb.com/api.php?amount=25&category=12&difficulty=easy&type=multiple",
+      "Mythology": "https://opentdb.com/api.php?amount=25&category=20&type=multiple",
+      "Video Games": "https://opentdb.com/api.php?amount=25&category=15&difficulty=easy&type=multiple",
      }
      console.log(category);
      return categories[category];
@@ -77,15 +77,15 @@ class Home extends Component {
   // Category Button Names
   makeCategory = () => {
     let categoryArray = [
-      'generalKnowledge',
-      'books',
-      'film',
-      'computers',
-      'music',
-      'geography',
-      'mythology',
-      'videoGames',
-      'boardGames'
+      'Board Games',
+      'Books',
+      'Computers',
+      'Film',
+      'General Knowledge',
+      'Geography',
+      'Music',
+      'Mythology',
+      'Video Games',
     ]
     return categoryArray.map((categoryName) => {
       return <button onClick={this.category} value={categoryName}>{categoryName}</button>
