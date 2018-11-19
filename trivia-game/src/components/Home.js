@@ -15,7 +15,6 @@ class Home extends Component {
     });
   }
 
-
   componentDidMount() {
     let computers = fetch(this.getCategoryUrl(this.state.currentCategory));
     computers.then((response) => {
@@ -87,19 +86,7 @@ class Home extends Component {
   }
 
   render() {
-    // TODO loop through all the questions
-    console.log(this.state.questions);
-    // const questions = this.state.quetions;
-    // const index = this.state.currentIndex;
-    // const currentQuestion = allQuestions(questions, index);
-
-    // function allQuestions(questions, index) {
-    //     questions.map((currentQuestion, currentIndex) => {
-    //       return currentQuestion[currentIndex];
-    //   });
-    // }
-   
-    // console.log(this.state.questions[x]);
+    // Loop through all the questions
     const currentQuestion = this.state.questions[this.state.currentIndex];
     console.log(currentQuestion);
     if (currentQuestion != null) {
@@ -132,7 +119,7 @@ function getChoices(question) {
     
     choices.push(question.correct_answer)
 
-    // TODO randomize order.
+    // Randomize order.
     for (let a = choices.length-1; a > 0; a--) {
       let b = Math.floor(Math.random() * (a + 1));
       let c = choices[a];
@@ -142,6 +129,5 @@ function getChoices(question) {
 
   return choices;
 }
-
 
 export default Home;
