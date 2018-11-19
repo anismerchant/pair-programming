@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 class Home extends Component {
 
+  // Establish state
   state = {
     currentCategory: "generalKnowledge",
     questions: [],
     currentIndex: 0
   }
 
+  // Grab questions
   displayQuestion(data) {
     let dataArray = data.results;
     return dataArray.map((question) => {
@@ -15,6 +17,7 @@ class Home extends Component {
     });
   }
 
+  // Fetch data from API and set state
   componentDidMount() {
     let computers = fetch(this.getCategoryUrl(this.state.currentCategory));
     computers.then((response) => {
@@ -26,9 +29,9 @@ class Home extends Component {
       }).catch(err => console.log(err));
   }
 
+  // Change category and its associated questions
   componentDidUpdate(prevProps, prevState) {
     if(prevState.currentCategory !== this.state.currentCategory) {
-      console.log(this.getCategoryUrl(this.state.currentCategory))
       let computers = fetch(this.getCategoryUrl(this.state.currentCategory));
       computers.then((response) => {
         return response.json();
@@ -40,18 +43,21 @@ class Home extends Component {
     }
   } 
   
+  // Advance to next question
   nextQuestion = () => {
     this.setState({
       currentIndex: this.state.currentIndex + 1
     }) 
   }
 
+  // Change category by setting current category to the one that's selected
   category = (e) => {
     this.setState({
       currentCategory: e.target.value
     })
   }
 
+  // API endpoints of categories
   getCategoryUrl = (category) => {
     let categories = {
       generalKnowledge: "https://opentdb.com/api.php?amount=25&category=9&difficulty=easy&type=multiple",
@@ -68,6 +74,7 @@ class Home extends Component {
      return categories[category];
   }
 
+  // Category Button Names
   makeCategory = () => {
     let categoryArray = [
       'generalKnowledge',
@@ -119,7 +126,7 @@ function getChoices(question) {
     
     choices.push(question.correct_answer)
 
-    // Randomize order.
+    // Randomize order
     for (let a = choices.length-1; a > 0; a--) {
       let b = Math.floor(Math.random() * (a + 1));
       let c = choices[a];
