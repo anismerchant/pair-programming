@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import decode from 'decode-html';
+import decoder from 'html-decoder';
 
 class Home extends Component {
 
@@ -12,16 +12,14 @@ class Home extends Component {
 
   // Grab questions
   decodeQuestions(questions) {
-    console.log(questions)
     let result = questions.map((q) => {
       return {
         ...q, 
-        question: decode(q.question),
-        correct_answer: decode(q.correct_answer),
-        incorrect_answers: q.incorrect_answers.map(decode)
+        question: decoder.decode(q.question),
+        correct_answer: decoder.decode(q.correct_answer),
+        incorrect_answers: q.incorrect_answers.map(decoder.decode)
       };
     });
-    console.log(result);
     return result;
   }
 
@@ -47,7 +45,7 @@ class Home extends Component {
         return response.json();
           }).then((data) => {
             this.setState({
-              questions: this.displayQuestion(data)
+              questions: this.decodeQuestions(data.results)
             })
         }).catch(err => console.log(err));
     }
@@ -124,8 +122,13 @@ class Home extends Component {
 
 getAnswer = (e) => {
   if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
+    // increment score in state
+    // move to next question
+    // show correct animation
     return setImmediate(() => alert("Correct"));
   } else {
+    // move to next question
+    // show incorrect animation
     return setImmediate(() => alert("Incorrect"));
   }
 }
