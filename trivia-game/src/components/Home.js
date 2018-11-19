@@ -70,7 +70,6 @@ class Home extends Component {
       "Mythology": "https://opentdb.com/api.php?amount=25&category=20&type=multiple",
       "Video Games": "https://opentdb.com/api.php?amount=25&category=15&difficulty=easy&type=multiple",
      }
-     console.log(category);
      return categories[category];
   }
 
@@ -87,15 +86,15 @@ class Home extends Component {
       'Mythology',
       'Video Games',
     ]
-    return categoryArray.map((categoryName) => {
-      return <button onClick={this.category} value={categoryName}>{categoryName}</button>
+    return categoryArray.map((categoryName, key) => {
+      return <button key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
     })
   }
 
   render() {
     // Loop through all the questions
     const currentQuestion = this.state.questions[this.state.currentIndex];
-    console.log(currentQuestion);
+
     if (currentQuestion != null) {
       return (
         <div>
