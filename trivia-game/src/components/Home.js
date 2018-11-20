@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import decoder from 'html-decoder';
+// import Anime from 'react-anime';
 
 class Home extends Component {
 
@@ -23,7 +24,6 @@ class Home extends Component {
     });
     return result;
   }
-
 
   // Fetch data from API and set state
   componentDidMount() {
@@ -60,7 +60,8 @@ class Home extends Component {
   nextQuestion = () => {
     this.setState({
       currentIndex: this.state.currentIndex + 1
-    }) 
+    })
+    document.getElementById("answerStatus").innerHTML = "";
   }
 
   // Change category by setting current category to the one that's selected
@@ -132,18 +133,20 @@ getAnswer = (e) => {
       score: this.state.score + 100
     });
        // show correct animation
-    setImmediate(() => alert("Correct"));
-     // move to next question
-    return this.nextQuestion();
+       //setImmediate(() => alert("Correct"));
+       document.getElementById("answerStatus").innerHTML = "Correct";
+    return;
   } else {
     // move to next question
-    this.nextQuestion();
     // show incorrect animation
-    return setImmediate(() => alert("Incorrect"));
+    //  setImmediate(() => alert(`Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`));
+    document.getElementById("answerStatus").innerHTML = `Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`;
+    return;
   }
 }
 
   render() {
+    
     // Loop through all the questions
     const currentQuestion = this.state.questions[this.state.currentIndex];
 
@@ -158,12 +161,13 @@ getAnswer = (e) => {
             })
           }
           <div>{this.state.score}</div>
+          <button onClick={this.nextQuestion}>Next Question?</button>
+          <div id="answerStatus"></div>
         </div>
       );
     } else {
       return <h1>Loading...</h1>;
     }
-
   }
 }
 
