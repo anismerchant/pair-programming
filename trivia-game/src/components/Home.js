@@ -152,17 +152,25 @@ getAnswer = (e) => {
 
     if (currentQuestion != null) {
       return (
-        <div>
-          {this.makeCategory()}
-          <h1>{currentQuestion.question}</h1>
-          {
-            this.getChoices(currentQuestion).map((choice, key )=> {
-              return <div key={key}><button onClick={this.getAnswer} name="choice" value={choice}>{choice}</button></div>;
-            })
-          }
-          <div>{this.state.score}</div>
-          <button onClick={this.nextQuestion}>Next Question?</button>
-          <div id="answerStatus"></div>
+        <div className ="trivia-game">
+          <div className = "trivia-game__category">
+            {this.makeCategory()}
+          </div>
+          
+          <div className = "trivia-game__current-question">
+            <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
+            {
+              this.getChoices(currentQuestion).map((choice, key )=> {
+                return <div key={key}><button onClick={this.getAnswer} name="choice" value={choice}>{choice}</button></div>;
+              })
+            }
+            
+            <button className = "trivia-game__current-question--next" onClick={this.nextQuestion}>Next Question?</button>
+            <div id="answerStatus" className = "trivia-game__current-question--answer-status"></div>
+          </div>
+          <div className = "trivia-game__score" >
+            {this.state.score}
+          </div>
         </div>
       );
     } else {
