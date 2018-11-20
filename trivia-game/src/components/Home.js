@@ -7,10 +7,11 @@ class Home extends Component {
   state = {
     currentCategory: "General Knowledge",
     questions: [],
-    currentIndex: 0
+    currentIndex: 0,
+    score: 0
   }
 
-  // Grab questions
+  // Decode questions
   decodeQuestions(questions) {
     let result = questions.map((q) => {
       return {
@@ -48,6 +49,10 @@ class Home extends Component {
               questions: this.decodeQuestions(data.results)
             })
         }).catch(err => console.log(err));
+    }
+
+    if (prevState.score !== this.state.score) {
+      console.log(this.state.score);
     }
   } 
   
@@ -123,11 +128,16 @@ class Home extends Component {
 getAnswer = (e) => {
   if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
     // increment score in state
-    // move to next question
-    // show correct animation
-    return setImmediate(() => alert("Correct"));
+    this.setState({
+      score: this.state.score + 100
+    });
+       // show correct animation
+    setImmediate(() => alert("Correct"));
+     // move to next question
+    return this.nextQuestion();
   } else {
     // move to next question
+    this.nextQuestion();
     // show incorrect animation
     return setImmediate(() => alert("Incorrect"));
   }
@@ -144,10 +154,10 @@ getAnswer = (e) => {
           <h1>{currentQuestion.question}</h1>
           {
             this.getChoices(currentQuestion).map((choice, key )=> {
-              return <div key={key}><input onClick={this.getAnswer} type="radio" name="choice"  value={choice}/>{choice}</div>;
+              return <div key={key}><button onClick={this.getAnswer} name="choice" value={choice}>{choice}</button></div>;
             })
           }
-          <button onClick={this.nextQuestion}>Next</button>
+          <div>{this.state.score}</div>
         </div>
       );
     } else {
