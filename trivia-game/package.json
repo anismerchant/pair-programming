@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animejs": "^2.2.0",
     "decode-html": "^2.0.0",
     "html-decoder": "^1.0.2",
     "react": "^16.6.3",
