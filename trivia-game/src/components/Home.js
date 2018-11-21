@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import decoder from 'html-decoder';
-// import Anime from 'react-anime';
 
 class Home extends Component {
 
@@ -101,7 +100,7 @@ class Home extends Component {
       'Video Games',
     ]
     return categoryArray.map((categoryName, key) => {
-      return <button key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
+      return <button className = "trivia-game__category--buttons" key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
     })
   }
 
@@ -123,27 +122,31 @@ class Home extends Component {
       choices[b] = c;
     }
 
-  return choices;
-}
-
-getAnswer = (e) => {
-  if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
-    // increment score in state
-    this.setState({
-      score: this.state.score + 100
-    });
-       // show correct animation
-       //setImmediate(() => alert("Correct"));
-       document.getElementById("answerStatus").innerHTML = "Correct";
-    return;
-  } else {
-    // move to next question
-    // show incorrect animation
-    //  setImmediate(() => alert(`Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`));
-    document.getElementById("answerStatus").innerHTML = `Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`;
-    return;
+    return choices;
   }
-}
+
+  getAnswer = (e) => {
+    if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
+      // increment score in state
+      this.setState({
+        score: this.state.score + 100
+      });
+        // show correct animation
+        //setImmediate(() => alert("Correct"));
+        // document.querySelector(`button[value="${this.state.questions[this.state.currentIndex].correct_answer}"]`).style.backgroundColor = "green";
+        document.getElementById("answerStatus").innerHTML = "Correct";
+        setTimeout(() =>
+          {this.nextQuestion()}, 3000);
+      return;
+    } else {
+      // move to next question
+      // show incorrect animation
+      //  setImmediate(() => alert(`Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`));
+      document.getElementById("answerStatus").innerHTML = `<div>The correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}<div>`;
+      return;
+    }
+  }
+
 
   render() {
     
@@ -158,18 +161,21 @@ getAnswer = (e) => {
           </div>
           
           <div className = "trivia-game__current-question">
-            <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
-            {
-              this.getChoices(currentQuestion).map((choice, key )=> {
-                return <div key={key}><button onClick={this.getAnswer} name="choice" value={choice}>{choice}</button></div>;
-              })
-            }
-            
-            <button className = "trivia-game__current-question--next" onClick={this.nextQuestion}>Next Question?</button>
+            <div className = "trivia-game__current-question--heading-container">
+              <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
+            </div>
+            <div className = "trivia-game__current-question__buttons">
+              {
+                this.getChoices(currentQuestion).map((choice, key ) => {
+                  return <button className = "trivia-game__current-question__buttons--choices" key={key} onClick={this.getAnswer} name="choice" value={choice}>{choice}</button>;
+                })
+              }
+              <button className = "trivia-game__current-question__buttons--next" onClick={this.nextQuestion}>Next Question</button>
+            </div>
             <div id="answerStatus" className = "trivia-game__current-question--answer-status"></div>
           </div>
           <div className = "trivia-game__score" >
-            {this.state.score}
+            <h1 className="trivia-game__score--heading">Score: {this.state.score}</h1>
           </div>
         </div>
       );
