@@ -1,0 +1,142 @@
+.App {
+  background-color: aliceblue;
+  font-family: 'Allerta Stencil';
+  min-width: 100vw;
+  min-height: 120vh;
+}
+
+.App .navigation {
+  width: 100%;
+  height: 50vh;
+}
+
+.App .navigation .navigation--heading {
+  text-align: center;
+  margin: 0.5rem;
+  font-size: 3rem;
+}
+
+.App .navigation .navigation--container-for-image {
+  width: 100%;
+  height: 40vh;
+}
+
+.App .navigation .navigation--container-for-image .navigation--image {
+  width: 100%;
+  height: 40vh;
+}
+
+.App .trivia-game {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 2%;
+}
+
+.App .trivia-game .trivia-game__category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 20%;
+}
+
+.App .trivia-game .trivia-game__category .trivia-game__category--buttons {
+  margin: 2% 0;
+  padding: 5%;
+  border-radius: 20%;
+  background-color: #fff;
+}
+
+.App .trivia-game .trivia-game__category .trivia-game__category--buttons:focus {
+  outline: 0;
+}
+
+.App .trivia-game .trivia-game__current-question {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60%;
+  margin: 0 5%;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question--heading-container {
+  text-align: center;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question--heading-container .trivia-game__current-question--heading {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--choices {
+  margin: 2% 0;
+  padding: 5%;
+  width: 25vw;
+  border-radius: 10%;
+  background-color: #fff;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--choices:focus {
+  outline: 0;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--next {
+  margin-top: 5%;
+  background-color: #fff;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--next:focus {
+  outline: 0;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question--answer-status {
+  margin: 2% 0;
+}
+
+.App .trivia-game .trivia-game__score {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 20%;
+}
+
+.App .trivia-game .trivia-game__score .trivia-game__score--heading {
+  font-size: 1.2rem;
+  margin: 0;
+}
+/*# sourceMappingURL=style.css.map */

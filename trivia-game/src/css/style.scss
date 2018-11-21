@@ -1,0 +1,98 @@
+.App {
+    background-color: aliceblue;
+    font-family: 'Allerta Stencil';
+    min-width: 100vw;
+    min-height: 120vh;
+
+    .navigation {
+        width: 100%;
+        height: 50vh;
+
+        .navigation--heading {
+            text-align: center;
+            margin: 0.5rem;
+            font-size: 3rem;
+        }
+        .navigation--container-for-image {
+            width: 100%;
+            height: 40vh;
+
+            .navigation--image {
+                width: 100%;
+                height: 40vh;
+            }
+        }
+    }
+
+
+    .trivia-game {
+        display: flex;
+        margin-top: 2%;
+
+        .trivia-game__category {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            .trivia-game__category--buttons {
+                margin: 2% 0;
+                padding: 5%;
+                border-radius: 20%;
+                background-color: #fff;
+                &:focus {outline:0;};
+            }
+        }
+        .trivia-game__current-question {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+            margin: 0 5%;
+
+            .trivia-game__current-question--heading-container {
+                text-align: center;
+
+                .trivia-game__current-question--heading {
+                    margin: 0;
+                    font-size: 1.2rem;
+                }
+            }
+            .trivia-game__current-question__buttons {
+                display: flex;
+                flex-direction: column;
+                margin-top: 2%;
+                align-items: center;
+
+                .trivia-game__current-question__buttons--choices {
+                    margin: 2% 0;
+                    padding: 5%;
+                    width: 25vw;
+                    border-radius: 10%;
+                    background-color: #fff;
+                    &:focus {outline:0;};
+                }
+                .trivia-game__current-question__buttons--next {
+                    margin-top: 5%;
+                    background-color: #fff;
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 50%;
+                    &:focus {outline:0;};
+                }
+            }
+            .trivia-game__current-question--answer-status {
+                margin: 2% 0;
+            }
+        }
+        .trivia-game__score {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+            
+            .trivia-game__score--heading {
+                font-size: 1.2rem;
+                margin: 0;
+            }
+        }
+    }
+}
