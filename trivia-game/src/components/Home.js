@@ -50,10 +50,6 @@ class Home extends Component {
             })
         }).catch(err => console.log(err));
     }
-
-    if (prevState.score !== this.state.score) {
-      console.log(this.state.score);
-    }
   } 
   
   // Advance to next question
@@ -163,24 +159,6 @@ class Home extends Component {
         <div className ="trivia-game">
           <div className = "trivia-game__category">
             {this.makeCategory()}
-          </div>
-          
-          <div className = "trivia-game__current-question">
-            <div className = "trivia-game__current-question--heading-container">
-              <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
-            </div>
-            <div className = "trivia-game__current-question__buttons">
-              {
-                this.getChoices(currentQuestion).map((choice, key ) => {
-                  return <button className = "trivia-game__current-question__buttons--choices" key={key} onClick={this.getAnswer} name="choice" value={choice}>{choice}</button>;
-                })
-              }
-              <button className = "trivia-game__current-question__buttons--next" onClick={this.nextQuestion}>Next Question</button>
-            </div>
-            <div id="answerStatus" className = "trivia-game__current-question--answer-status"></div>
-          </div>
-          <div className = "trivia-game__score" >
-            <h1 className="trivia-game__score--heading">Score: {this.state.score}</h1>
           </div>
         </div>
       );
