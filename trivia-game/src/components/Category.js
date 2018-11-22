@@ -7,21 +7,24 @@ class Home extends Component {
   state = {
     currentCategory: "General Knowledge",
     questions: [],
+    resultMessage: "",
     currentIndex: 0,
     score: 0
   }
 
   // Decode questions
-  decodeQuestions(questions) {
-    let result = questions.map((q) => {
-      return {
+  processQuestions(questions) {
+    return questions.map((q) => {
+      let decoded = {
         ...q, 
         question: decoder.decode(q.question),
         correct_answer: decoder.decode(q.correct_answer),
-        incorrect_answers: q.incorrect_answers.map(decoder.decode)
+        incorrect_answers: q.incorrect_answers.map(decoder.decode),
       };
+
+      decoded.choices = this.getChoices(decoded);
+      return decoded;
     });
-    return result;
   }
 
   // Fetch data from API and set state
@@ -31,7 +34,7 @@ class Home extends Component {
       return response.json();
         }).then((data) => {
           this.setState({
-            questions: this.decodeQuestions(data.results)
+            questions: this.processQuestions(data.results)
           })
       }).catch(err => console.log(err));
 
@@ -45,7 +48,7 @@ class Home extends Component {
         return response.json();
           }).then((data) => {
             this.setState({
-              questions: this.decodeQuestions(data.results)
+              questions: this.processQuestions(data.results)
             })
         }).catch(err => console.log(err));
     }
@@ -100,9 +103,7 @@ class Home extends Component {
       'Video Games',
     ]
     return categoryArray.map((categoryName, key) => {
-      return (
-        <button className = "trivia-game__category--buttons" key={key} onClick={this.category} value={categoryName}>{categoryName}</button> 
-      )
+      return <button className = "trivia-game__category--buttons" key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
     })
   }
 
@@ -111,10 +112,18 @@ class Home extends Component {
     let choices = [];
       
     question.incorrect_answers.map( (incorrect) => {
-      return choices.push(incorrect);
+      return choices.push({
+        choiceText: incorrect,
+        isSelected: false,
+        isCorrect: false 
+        });
     });
     
-    choices.push(question.correct_answer);
+    choices.push({
+      choiceText: question.correct_answer,
+      isSelected: false,
+      isCorrect: true
+    });
 
     // Randomize order
     for (let a = choices.length-1; a > 0; a--) {
@@ -135,8 +144,9 @@ class Home extends Component {
       });
         // show correct animation
         //setImmediate(() => alert("Correct"));
-        // e.target.style.backgroundColor = "green";
-        document.getElementById("answerStatus").innerHTML = "Correct";
+        this.setState({
+          resultMessage: "Correct"
+        });
         setTimeout(() =>
           {this.nextQuestion()}, 3000);
       return;
@@ -144,7 +154,9 @@ class Home extends Component {
       // move to next question
       // show incorrect animation
       //  setImmediate(() => alert(`Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`));
-      document.getElementById("answerStatus").innerHTML = `<div>The correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}<div>`;
+      this.setState({
+        resultMessage: `The correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`
+      })
       return;
     }
   }
@@ -157,24 +169,30 @@ class Home extends Component {
 
     if (currentQuestion != null) {
       return (
-        <div className ="trivia-game__category">
-            <div className = "trivia-game__current-question">
+        <div className ="trivia-game">
+          <div className = "trivia-game__category">
+            {this.makeCategory()}
+          </div>
+          
+          <div className = "trivia-game__current-question">
             <div className = "trivia-game__current-question--heading-container">
-                <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
+              <h1 className = "trivia-game__current-question--heading">{currentQuestion.question}</h1>
             </div>
             <div className = "trivia-game__current-question__buttons">
-                {
-                this.getChoices(currentQuestion).map((choice, key ) => {
-                    return <button className = "trivia-game__current-question__buttons--choices" key={key} onClick={this.getAnswer} name="choice" value={choice}>{choice}</button>;
+              {
+                currentQuestion.choices.map((choice, key ) => {
+                  // TODO write a function that returns the className string for the `button` given the choice object
+                  // if the choice object isSelected and isCorrect, add a class name that makes the button red, otherwise just return "trivia-game__current-question__buttons--choices"
+                  return <button className={"trivia-game__current-question__buttons--choices"} key={key} onClick={this.getAnswer} name="choice"  value={choice.choiceText}>{choice.choiceText}</button>;
                 })
-                }
-                <button className = "trivia-game__current-question__buttons--next" onClick={this.nextQuestion}>Next Question</button>
+              }
+              <button className = "trivia-game__current-question__buttons--next" onClick={this.nextQuestion}>Next Question</button>
             </div>
-            <div id="answerStatus" className = "trivia-game__current-question--answer-status"></div>
-            </div>
-            <div className = "trivia-game__score" >
+            <div id="answerStatus" className = "trivia-game__current-question--answer-status">{this.state.resultMessage}</div>
+          </div>
+          <div className = "trivia-game__score" >
             <h1 className="trivia-game__score--heading">Score: {this.state.score}</h1>
-            </div>
+          </div>
         </div>
       );
     } else {
