@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import decoder from 'html-decoder';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -100,7 +101,11 @@ class Home extends Component {
       'Video Games',
     ]
     return categoryArray.map((categoryName, key) => {
-      return <button className = "trivia-game__category--buttons" key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
+      return (
+        <Link className = "trivia-game__category--links" to={`/${categoryName}`} >
+            <button className = "trivia-game__category--buttons" key={key} onClick={this.category} value={categoryName}>{categoryName}</button>
+        </Link>
+      )
     })
   }
 
