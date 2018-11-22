@@ -133,7 +133,7 @@ class Home extends Component {
       });
         // show correct animation
         //setImmediate(() => alert("Correct"));
-        // document.querySelector(`button[value="${this.state.questions[this.state.currentIndex].correct_answer}"]`).style.backgroundColor = "green";
+        // e.target.style.backgroundColor = "green";
         document.getElementById("answerStatus").innerHTML = "Correct";
         setTimeout(() =>
           {this.nextQuestion()}, 3000);
