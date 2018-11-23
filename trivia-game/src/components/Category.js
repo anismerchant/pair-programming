@@ -142,14 +142,19 @@ class Home extends Component {
       this.setState({
         score: this.state.score + 100
       });
-        // show correct animation
-        //setImmediate(() => alert("Correct"));
-        this.setState({
-          resultMessage: "Correct"
-        });
-        setTimeout(() =>
-          {this.nextQuestion()}, 3000);
-      return;
+      this.setState({
+        resultMessage: "Correct"
+      });
+      let intervalId = setInterval(() => {
+        let elem = document.getElementById('score');
+        elem.innerHTML = Number(elem.innerHTML) + 1;
+        if(Number(elem.innerHTML) === this.state.score) {
+          clearInterval(intervalId);
+          setTimeout(() =>{
+            this.nextQuestion()
+          }, 3000);
+        }
+      }, 10);        
     } else {
       // move to next question
       // show incorrect animation
@@ -160,7 +165,6 @@ class Home extends Component {
       return;
     }
   }
-
 
   render() {
     
@@ -191,7 +195,7 @@ class Home extends Component {
             <div id="answerStatus" className = "trivia-game__current-question--answer-status">{this.state.resultMessage}</div>
           </div>
           <div className = "trivia-game__score" >
-            <h1 className="trivia-game__score--heading">Score: {this.state.score}</h1>
+            <h1 className="trivia-game__score--heading">Score: <span id='score'>0</span></h1>
           </div>
         </div>
       );
