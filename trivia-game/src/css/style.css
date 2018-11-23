@@ -172,10 +172,19 @@
   height: 5rem;
   border-radius: 50%;
   margin-top: 15%;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
 }
 
 .App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--next:focus {
   outline: 0;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--next:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .App .trivia-game .trivia-game__current-question .trivia-game__current-question--answer-status {
