@@ -195,7 +195,7 @@ class Home extends Component {
             <div id="answerStatus" className = "trivia-game__current-question--answer-status">{this.state.resultMessage}</div>
           </div>
           <div className = "trivia-game__score" >
-            <h1 className="trivia-game__score--heading">Score: <span id='score'>0</span></h1>
+            <h1 className="trivia-game__score--heading">SCORE: <span id='score'>0</span></h1>
           </div>
         </div>
       );
