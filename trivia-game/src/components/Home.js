@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import decoder from 'html-decoder';
 import { Link } from 'react-router-dom';
+import anime from 'animejs';
 
 class Home extends Component {
 
@@ -156,9 +157,10 @@ class Home extends Component {
 
     if (currentQuestion != null) {
       return (
-        <div className ="trivia-game">
-          <div className = "trivia-game__category">
+        <div className ="trivia-game--home">
+          <div className = "trivia-game__category--home">
             {this.makeCategory()}
+          
           </div>
         </div>
       );
