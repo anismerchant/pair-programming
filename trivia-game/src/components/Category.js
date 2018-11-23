@@ -138,7 +138,8 @@ class Home extends Component {
 
   getAnswer = (e) => {
     if(this.state.questions[this.state.currentIndex].correct_answer === e.target.value ) {
-      // increment score in state
+      // e.target.style.color = '#32CD32';
+      // e.target.style.borderColor = '#FF1461';
       this.setState({
         score: this.state.score + 100
       });
@@ -156,9 +157,8 @@ class Home extends Component {
         }
       }, 10);        
     } else {
-      // move to next question
-      // show incorrect animation
-      //  setImmediate(() => alert(`Nah yo fam, the correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`));
+      // e.target.style.color = '#FF1461';
+      // e.target.style.borderColor = '#FF1461';
       this.setState({
         resultMessage: `The correct answer is: ${this.state.questions[this.state.currentIndex].correct_answer}`
       })

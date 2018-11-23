@@ -149,10 +149,19 @@
   width: 25vw;
   background-color: transparent;
   color: #FFF;
+  -webkit-transition: -webkit-transform .2s;
+  transition: -webkit-transform .2s;
+  transition: transform .2s;
+  transition: transform .2s, -webkit-transform .2s;
 }
 
 .App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--choices:focus {
   outline: 0;
+}
+
+.App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--choices:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
 }
 
 .App .trivia-game .trivia-game__current-question .trivia-game__current-question__buttons .trivia-game__current-question__buttons--next {
