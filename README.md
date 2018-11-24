@@ -1,4 +1,5 @@
 Pair Programming Project: Building an Educational Trivia Game
+One-day Challenge
 
-Coders:
-Anastasiya Prosvirina and Anis Merchant
+Primary: Anis Merchant
+Contributors: Anastasiya Prosvirina, Jake Maldonado, and Nigel Maynard
