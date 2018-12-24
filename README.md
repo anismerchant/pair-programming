@@ -1,6 +1,6 @@
-Pair Programming Project: Building an Educational Trivia Game, One-day Challenge
+# Project Nine: Pair Programming  
 
-Technology used: React
-
-Primary: Anis Merchant |
-Contributors: Jake Maldonado, Nigel Maynard, and Anastasiya Prosvirina
+* Built an educational trivia game, one-day challenge
+* Technology Stack: React, HTML/SCSS/BEM
+* Primary: Anis Merchant 
+* Contributors: Jake Maldonado, Nigel Maynard, and Anastasiya Prosvirina
